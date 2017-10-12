@@ -11,4 +11,13 @@ headphonesOn = DEFAULT_HEADPHONES_ON
 EAOn = DEFAULT_EA_ON # Variable may not be necessary - Woermachine
 shotgunOn = DEFAULT_SHOTGUN_ON  # Variable may not be necessary - Woermachine
 
+class Properties:
+    def __init__(self, scrollspeed, volume, threshold, headphones, ea):
+        self.s = scrollspeed
+        self.v = volume
+        self.t = threshold
+        self.h = headphones
+        self.e = ea
+
+
 # TODO: getters and setters for each property
