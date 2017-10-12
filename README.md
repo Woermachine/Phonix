@@ -13,3 +13,8 @@ RST:8
 CS:24
 Vin:1
 GND:6
+
+## Install
+NLTK
+PiBluez
+and follow the instructions in this video https://www.youtube.com/watch?v=BeBfpJnN9SE
