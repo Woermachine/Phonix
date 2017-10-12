@@ -20,4 +20,4 @@ PiBluez
 and follow the instructions in this video https://www.youtube.com/watch?v=BeBfpJnN9SE
 
 Py-Gaugette-
-install all of the things he asks in this video to get gaugette onto your machine/pi https://www.youtube.com/watch?v=BeBfpJnN9SE
+To install gaugette and it's dependencies look at its gitHub page: https://github.com/stephen-mw/ssd1306-128x64-lib
