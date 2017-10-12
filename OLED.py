@@ -50,35 +50,33 @@ def updateDisplay():
     offset = 0  # flips between 0 and 32 for double buffering
 
     while True:
+        ## write the current time to the display on every other cycle
+        if offset == 0:
+            for i in range(0, len(list) - 1):
+                text = list[i]
+                text2 = list[i + 1]
+                led.draw_text2(0, 10, text, 1)
+                led.draw_text2(0, 19, text2, 1)
+                led.display()
+                time.sleep(1)
+                led.clear_display()  # can be changed to change certain pixels
 
+            led.draw_text2(0, 0, "$", 1)
+            led.draw_text2(0, 25, "$", 1)
+            led.draw_text2(120, 0, "$", 1)
+            led.draw_text2(120, 25, "$", 1)
+            led.draw_text2(0, 8, "123456789 10 11 12 13 14 15", 1)
+            led.display()
+            time.sleep(5)
+            led.clear_display()
+        else:
+            time.sleep(1)
 
-## write the current time to the display on every other cycle
-if offset == 0:
-    for i in range(0, len(list) - 1):
-        text = list[i]
-        text2 = list[i + 1]
-        led.draw_text2(0, 10, text, 1)
-        led.draw_text2(0, 19, text2, 1)
-        led.display()
-        time.sleep(1)
-        led.clear_display()  # can be changed to change certain pixels
-
-    led.draw_text2(0, 0, "$", 1)
-    led.draw_text2(0, 25, "$", 1)
-    led.draw_text2(120, 0, "$", 1)
-    led.draw_text2(120, 25, "$", 1)
-    led.draw_text2(0, 8, "123456789 10 11 12 13 14 15", 1)
-    led.display()
-    time.sleep(5)
-    led.clear_display()
-else:
-    time.sleep(1)
-
-    ##vertically scroll to switch between buffers
-for i in range(0, 32):
-    offset = (offset + 1) % 64
-    led.command(led.SET_START_LINE | offset)
-    time.sleep(0.01)
+            ##vertically scroll to switch between buffers
+        for i in range(0, 32):
+            offset = (offset + 1) % 64
+            led.command(led.SET_START_LINE | offset)
+            time.sleep(0.01)
 
 
 def formatTXT(list):
@@ -108,8 +106,8 @@ def formatTXT(list):
             line = list[i] + " "
             temp = len(list[i]) + 1
         else:
-            print "list is empty"
+            print("list is empty")
 
-    print listb
+    print(listb)
 
 # name of file as parameter and continue over writing file and keep open function(list of 								text,corners boolean if true put identifier)
