@@ -1,4 +1,6 @@
 import OLED
+import Bluetooth
+import Properties
 import ArdunioInterface
 
 def main():

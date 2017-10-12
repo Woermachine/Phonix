@@ -1,11 +1,9 @@
-#Formerly Formattxt.py
-
-#import gaugette.ssd1306
-#import gaugette.platform
-#import gaugette.gpio
-#import time
-#import sys
-#import random
+import gaugette.ssd1306
+import gaugette.platform
+import gaugette.gpio
+import time
+import sys
+import random
 
 import nltk
 nltk.download("punkt")
