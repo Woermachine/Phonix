@@ -8,11 +8,28 @@ import random
 import nltk
 nltk.download("punkt")
 
-
+properties = None;
 currentText = []
 currentCorners = [False,False,False,False] #FL, FR, BL, BR
 
 textQueue = []
+
+#Initialization of display values
+RESET_PIN = 15  # WiringPi pin 15 is GPIO14.
+DC_PIN = 16  # WiringPi pin 16 is GPIO15.
+
+spi_bus = 0
+spi_device = 0
+gpio = gaugette.gpio.GPIO()
+spi = gaugette.spi.SPI(spi_bus, spi_device)
+
+# Very important... This lets py-gaugette 'know' what pins to use in order to reset the display
+led = gaugette.ssd1306.SSD1306(gpio, spi, reset_pin=RESET_PIN, dc_pin=DC_PIN, rows=32, cols=128)
+
+
+#to get the scrollSpeed value
+def setProperties(driverProperties):
+    properties = driverProperties
 
 def getCurrentCorners():
     return currentCorners
@@ -23,21 +40,7 @@ def setCurrentCorners(newCorners):
     currentCorners = newCorners
     updateDisplay()
 
-
-def updateDisplay():
-    ##Most of the commented out stuff is what is used to actually display stuff to the screen.
-
-    RESET_PIN = 15  # WiringPi pin 15 is GPIO14.
-    DC_PIN = 16  # WiringPi pin 16 is GPIO15.
-
-    spi_bus = 0
-    spi_device = 0
-    gpio = gaugette.gpio.GPIO()
-    spi = gaugette.spi.SPI(spi_bus, spi_device)
-
-    # Very important... This lets py-gaugette 'know' what pins to use in order to reset the display
-    led = gaugette.ssd1306.SSD1306(gpio, spi, reset_pin=RESET_PIN, dc_pin=DC_PIN, rows=32, cols=128)
-
+def initDisplay():
     # Change rows & cols values depending on your display dimensions.
     led.begin()
     led.clear_display()
@@ -45,6 +48,9 @@ def updateDisplay():
     led.invert_display()
     time.sleep(0.5)
 
+
+def updateDisplay():
+    ##Most of the commented out stuff is what is used to actually display stuff to the screen.
     offset = 0  # flips between 0 and 32 for double buffering
 
     while True:
@@ -108,4 +114,4 @@ def formatTXT(list):
 
     print(listb)
 
-# name of file as parameter and continue over writing file and keep open function(list of 								text,corners boolean if true put identifier)
+# name of file as parameter and continue over writing file and keep open function(list of text,corners boolean if true put identifier)

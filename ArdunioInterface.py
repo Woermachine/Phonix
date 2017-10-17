@@ -1,10 +1,14 @@
 direction = -1
 oled = None
+properties = None
 
 
 def setOLED(driverOLED):
     oled = driverOLED
 
+#to get the threshold value
+def setProperties(driverProperties):
+    properties = driverProperties
 
 def onReceived():
     direction # = recieved direction
