@@ -14,7 +14,76 @@ CS:24
 Vin:1
 GND:6
 
-## Install
+## Update/Install
+Be connected to internet
+
+####Make sure everythings up-to-date
+
+``` sudo apt-get update```
+
+####Install Python3:
+
+``` sudo apt-get install python3```
+
+####Install pybluez:
+
+```
+sudo apt-get install python-pip python-dev ipython
+
+sudo apt-get install libbluetooth-dev
+
+sudo pip install pybluez
+``` 
+
+####Install Git:
+
+```sudo apt-get install git```
+
+####Install OLED stuff:
+
+///You may need this:
+```
+sudo apt-get install git-core
+
+sudo nano /etc/modprobe.d/raspi-blacklist.conf
+```
+
+Ctrl-Z to exit
+
+```
+sudo nano /etc/modules
+```
+
+make sure this file reads
+
+```
+i2c-bcm2708
+
+i2c-dev
+```
+
+Ctrl-O to write out
+
+Ctrl-Z to exit
+
+```
+sudo reboot
+```
+System will Reboot
+
+After system reboot
+```
+git clone https://github.com/the-raspberry-pi-guy/OLED
+cd OLED
+sh OLEDinstall.sh
+```
+
+#Clone
+
+Clone this repository
+
+``` git clone https://github.com/Woermachine/Phonix```
+
 NLTK
 PiBluez
 and follow the instructions in this video https://www.youtube.com/watch?v=BeBfpJnN9SE

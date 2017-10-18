@@ -16,6 +16,7 @@ def main():
 
     OLED.setProperties(Properties)
     OLED.initDisplay()
+    OLED.updateDisplay()
 
     exitBool = True
     while(exitBool):
