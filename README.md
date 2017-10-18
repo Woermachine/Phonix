@@ -25,6 +25,10 @@ Be connected to internet
 
 ``` sudo apt-get install python3```
 
+####Install NLTK
+
+``` sudo pip install nltk``` 
+
 ####Install pybluez:
 
 ```
@@ -66,10 +70,10 @@ Ctrl-O to write out
 
 Ctrl-Z to exit
 
-```
-sudo reboot
-```
-System will Reboot
+**Open in Raspbian home menu, open preferences>interfaces and change ssh, and spi to enabled**
+
+When prompted reboot the system
+
 
 After system reboot
 ```
@@ -78,11 +82,23 @@ cd OLED
 sh OLEDinstall.sh
 ```
 
-#Clone
+This will clone the OLED library and install the gaugette library
 
-Clone this repository
+run one of the example programs to test that the screen is functioning
 
-``` git clone https://github.com/Woermachine/Phonix```
+```
+cd python-examples
+sudo pythons OLEDclock.py
+```
+
+#Install this repository Clone
+
+After preforming the previous steps, clone this repository
+
+```
+cd ~/Desktop/
+git clone https://github.com/Woermachine/Phonix
+```
 
 NLTK
 PiBluez
