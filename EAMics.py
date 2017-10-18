@@ -1,6 +1,7 @@
+# For testing
 
-sampleInterval = 1;
-threshold = 1.0;
+sampleInterval = 1
+threshold = 1.0
 
 def setThreshold(threshold):
     #sets the threshold, given from properties

@@ -15,11 +15,11 @@ def main():
     ShotgunMic.setBluetooth(Bluetooth)
 
     OLED.setProperties(Properties)
-    OLED.initDisplay();
+    OLED.initDisplay()
 
     exitBool = True
-    while(~exitBool):
-
+    while(exitBool):
+        a = True
     return
 
 main()
