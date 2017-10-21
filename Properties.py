@@ -5,10 +5,16 @@ DEFAULT_HEADPHONES_ON = False
 DEFAULT_EA_ON = True
 DEFAULT_SHOTGUN_ON = True
 
+#These can all be accessed directly after importing Properties
 scrollSpeed = DEFAULT_SCROLL_SPEED
 threshold = DEFAULT_THRESHOLD
 headphonesOn = DEFAULT_HEADPHONES_ON
 EAOn = DEFAULT_EA_ON # Variable may not be necessary - Woermachine
 shotgunOn = DEFAULT_SHOTGUN_ON  # Variable may not be necessary - Woermachine
 
-# TODO: getters and setters for each property
+def resetToDefault():
+    scrollSpeed = DEFAULT_SCROLL_SPEED
+    threshold = DEFAULT_THRESHOLD
+    headphonesOn = DEFAULT_HEADPHONES_ON
+    EAOn = DEFAULT_EA_ON  # Variable may not be necessary - Woermachine
+    shotgunOn = DEFAULT_SHOTGUN_ON  # Variable may not be necessary - Woermachine

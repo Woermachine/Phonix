@@ -1,9 +1,18 @@
 from bluetooth import *
+shotgunMic = None;
+oled = None;
 
 
 bufferIn = []
 bufferOut = []
 running = True
+
+def setShotgunMic(driverShotgunMic):
+    shotgunMic = driverShotgunMic
+
+def setOLED(driverOLED):
+    oled = driverOLED
+
 def onReceiveAudio(audio):
     #puts audio in the bufferOut
     return
