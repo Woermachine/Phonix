@@ -25,7 +25,7 @@ spi = gaugette.spi.SPI(spi_bus, spi_device)
 
 # Very important... This lets py-gaugette 'know' what pins to use in order to reset the display
 led = gaugette.ssd1306.SSD1306(gpio, spi, reset_pin=RESET_PIN, dc_pin=DC_PIN, rows=32, cols=128)
-
+list = list() #Initialize an empty list to prevent exceptions.
 
 #to get the scrollSpeed value
 def setProperties(driverProperties):
