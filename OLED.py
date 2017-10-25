@@ -91,24 +91,24 @@ def formatTXT(list):
     from nltk.tokenize import sent_tokenize, word_tokenize
     list = word_tokenize(data)
 
-    max = 16
-    line = ""
-    temp = 0
+    maxDisplayChars = 16
+    displayChunk = ""
+    charCount = 0
     listb = []
     ##adds the number of characters for each of the tokenized words and makes sure its not over 16
     for i in range(0, len(list) - 1):
 
-        temp = temp + len(list[i])
+        charCount = charCount + len(list[i])
 
-        if temp <= max:
+        if charCount <= maxDisplayChars:
 
-            line += list[i] + " "
-            temp = temp + 1
+            displayChunk += list[i] + " "
+            charCount = charCount + 1
 
-        elif temp > max:
-            listb.append(line[:-1])
-            line = list[i] + " "
-            temp = len(list[i]) + 1
+        elif charCount > maxDisplayChars:
+            listb.append(displayChunk[:-1])
+            displayChunk = list[i] + " "
+            charCount = len(list[i]) + 1
         else:
             print("list is empty")
 

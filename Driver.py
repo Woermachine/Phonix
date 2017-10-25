@@ -19,7 +19,7 @@ def main():
 
     exitBool = True
     while(~exitBool):
-
+        exitBool = False;
     return
 
 main()
