@@ -1,3 +1,5 @@
+from threading import Thread
+
 direction = -1
 oled = None
 properties = None
