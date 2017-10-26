@@ -45,7 +45,6 @@ def initDisplay():
     led.begin()
     led.clear_display()
     led.display()
-    led.invert_display()
     time.sleep(0.5)
 
 def clearAlerts():
@@ -80,8 +79,8 @@ def updateText():
         currentText[0] = currentText[1]
         currentText[1] = textQueue.pop(0)
 
-    led.draw_text2(0, 10, currentText[0], 1)
-    led.draw_text2(0, 19, currentText[1], 1)
+    led.draw_text2(0, 8, currentText[0], 1)
+    led.draw_text2(0, 17, currentText[1], 1)
 
     print("Debug: current display: " + currentText[0] + "/" + currentText[1])
 
@@ -121,7 +120,7 @@ def queueIncomingText(incomingText):
     regex = "([ ]|[ +]|[\n]|[\t])"
     wordList = regexp_tokenize(incomingText, regex, gaps=True, discard_empty=True)
 
-    maxLineChars = 16
+    maxLineChars = 20
     displayLine = ""
     charCount = 0
 
@@ -132,6 +131,11 @@ def queueIncomingText(incomingText):
         if charCount <= maxLineChars:
             displayLine += wordList[i]
         elif charCount > maxLineChars:
+
+            if(len(displayLine) < maxLineChars):
+                for j in range(len(displayLine), maxLineChars):
+                    displayLine.append(" ")
+
             textQueue.append(displayLine)
             print("Debug: " + displayLine + "\t\tadded to text queue.")
             displayLine = wordList[i]
