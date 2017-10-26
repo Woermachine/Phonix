@@ -65,7 +65,14 @@ def updateAlerts():
         led.draw_text2(120, 25, "$", 1)
     led.display()
 
+
 def updateText():
+
+    #ensures there are at least 2 items in the text queue 
+    if(len(textQueue) < 2):
+        while(len(textQueue) < 2):
+            textQueue.append(" ")
+
     if(currentText[0] == " " & currentText[1] == " "):
         currentText[0] = textQueue.pop(0)
         currentText[1] = textQueue.pop(0)
@@ -75,6 +82,8 @@ def updateText():
 
     led.draw_text2(0, 10, currentText[0], 1)
     led.draw_text2(0, 19, currentText[1], 1)
+
+    print("Debug: current display:   " + currentText[0] + "/" + currentText[1])
 
     led.display()
 
@@ -125,6 +134,7 @@ def queueIncomingText(incomingText):
             charCount = charCount + 1
         elif charCount > maxLineChars:
             textQueue.append(displayLine[:-1])
+            print("Debug: " + displayLine[:-1] + " added to text queue.")
             displayLine = wordList[i] + " "
             charCount = len(wordList[i]) + 1
 
