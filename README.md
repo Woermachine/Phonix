@@ -36,8 +36,18 @@ sudo apt-get install python-pip python-dev ipython
 
 sudo apt-get install libbluetooth-dev
 
-sudo pip install pybluez
+sudo pip3 install pybluez
 ``` 
+
+#### Configure Pybluez Bluetooth Service:
+the bluetooth service running on the raspberry pi will not have compatibility mode enabled by default, disabling the ability to set
+bluetooth profiles via command-line impossible: First thing we need to do is add -C to the bluetooth.service
+
+<INSERT_WORK_HERE>
+
+Then we can enable serial profile with the following:
+
+```sudo sdptool add SP```
 
 #### Install Sound Module Dependencies
 sounddevice is used to listen to shotgun mic, for it to install correctly, we need to first install cffi and its c dependendency ffi:
