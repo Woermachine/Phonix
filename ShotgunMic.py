@@ -33,9 +33,9 @@ def sendAudioChunk(self):
 
 print("Recording...")
 with sd.InputStream(callback=callback):
-    print('#' * 80);
+    print('#' * 80)
     print('press Ctrl+C to stop recording')
-    print('#' * 80);
+    print('#' * 80)
     while True:
         file.write(audio_queue.get())
 
