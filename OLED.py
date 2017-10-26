@@ -68,7 +68,7 @@ def updateAlerts():
 
 def updateText():
 
-    #ensures there are at least 2 items in the text queue 
+    #ensures there are at least 2 items in the text queue
     if(len(textQueue) < 2):
         while(len(textQueue) < 2):
             textQueue.append(" ")
@@ -76,7 +76,7 @@ def updateText():
     if(currentText[0] == " " & currentText[1] == " "):
         currentText[0] = textQueue.pop(0)
         currentText[1] = textQueue.pop(0)
-    elif:
+    else:
         currentText[0] = currentText[1]
         currentText[1] = textQueue.pop(0)
 
