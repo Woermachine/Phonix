@@ -1,0 +1,15 @@
+[Unit]
+Description=Service which Maintains an instance of the Phonix Driver.
+After=syslog.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/Phonix
+ExecStart=/home/pi/Phonix/Driver.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
