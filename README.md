@@ -40,8 +40,12 @@ sudo pip install pybluez
 ``` 
 
 #### Install Sound Module Dependencies
-sounddevice is used to listen to shotgun mic, for it to install correctly, we need to first install cffi:
-```sudo pip3 install cffi```
+sounddevice is used to listen to shotgun mic, for it to install correctly, we need to first install cffi and its c dependendency ffi:
+```
+sudo apt-get install libffi-dev
+
+sudo pip3 install cffi
+```
 
 Then install sounddevice module:
 ```sudo pip3 install sounddevice```
