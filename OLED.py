@@ -71,9 +71,9 @@ def updateText():
     #ensures there are at least 2 items in the text queue
     if(len(textQueue) < 2):
         while(len(textQueue) < 2):
-            textQueue.append(" ")
+            textQueue.append("")
 
-    if(currentText[0] == " " & currentText[1] == " "):
+    if((currentText[0] == "") & (currentText[1] == "")):
         currentText[0] = textQueue.pop(0)
         currentText[1] = textQueue.pop(0)
     else:
@@ -83,7 +83,7 @@ def updateText():
     led.draw_text2(0, 10, currentText[0], 1)
     led.draw_text2(0, 19, currentText[1], 1)
 
-    print("Debug: current display:   " + currentText[0] + "/" + currentText[1])
+    print("Debug: current display: " + currentText[0] + "/" + currentText[1])
 
     led.display()
 
@@ -117,26 +117,29 @@ def updateText():
 
 
 def queueIncomingText(incomingText):
-    from nltk.tokenize import sent_tokenize, word_tokenize
-    wordList = word_tokenize(incomingText)
+    from nltk.tokenize import regexp_tokenize
+    regex = "([ ]|[ +]|[\n]|[\t])"
+    wordList = regexp_tokenize(incomingText, regex, gaps=True, discard_empty=True)
 
     maxLineChars = 16
     displayLine = ""
     charCount = 0
 
     ##adds the number of characters for each of the tokenized words and makes sure its not over 16
-    for i in range(0, len(wordList) - 1):
-
+    for i in range(0, len(wordList)):
         charCount = charCount + len(wordList[i])
 
         if charCount <= maxLineChars:
-            displayLine += wordList[i] + " "
-            charCount = charCount + 1
+            displayLine += wordList[i]
         elif charCount > maxLineChars:
-            textQueue.append(displayLine[:-1])
-            print("Debug: " + displayLine[:-1] + " added to text queue.")
-            displayLine = wordList[i] + " "
-            charCount = len(wordList[i]) + 1
+            textQueue.append(displayLine)
+            print("Debug: " + displayLine + "\t\tadded to text queue.")
+            displayLine = wordList[i]
+            charCount = len(wordList[i])
+
+    # gets the last char line
+    textQueue.append(displayLine)
+    print("Debug: " + displayLine + " added to text queue.")
 
     print("Debug: End of incoming text.")
 

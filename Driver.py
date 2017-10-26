@@ -21,10 +21,9 @@ def main():
 
     OLED.setProperties(Properties)
     OLED.initDisplay()
-    OLED.updateDisplay()
 
     #code to test the OLED
-    testString = "This is a test string to show whether the OlED will update properly. Let's see how this goes."
+    testString = "This is a test string to show whether the OlED will update properly Let's see how this goes"
 
     OLED.queueIncomingText(testString)
 
