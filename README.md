@@ -17,19 +17,19 @@ GND:6
 ## Update/Install
 Be connected to internet
 
-####Make sure everythings up-to-date
+#### Make sure everythings up-to-date
 
 ``` sudo apt-get update```
 
-####Install Python3:
+#### Install Python3:
 
 ``` sudo apt-get install python3```
 
-####Install NLTK
+#### Install NLTK
 
 ``` sudo pip3 install nltk``` 
 
-####Install pybluez:
+#### Install pybluez:
 
 ```
 sudo apt-get install python-pip python-dev ipython
@@ -39,18 +39,18 @@ sudo apt-get install libbluetooth-dev
 sudo pip install pybluez
 ``` 
 
-####Install Sound Module Dependencies
+#### Install Sound Module Dependencies
 sounddevice is used to listen to shotgun mic, for it to install correctly, we need to first install cffi:
 ```sudo pip3 install cffi```
 
 Then install sounddevice module:
 ```sudo pip3 install sounddevice```
 
-####Install Git:
+#### Install Git:
 
 ```sudo apt-get install git```
 
-####Install OLED stuff:
+#### Install OLED stuff:
 
 ///You may need this:
 ```
