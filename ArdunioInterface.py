@@ -24,32 +24,34 @@ def setProperties(driverProperties):
     properties = driverProperties
 
 def onReceived():
+    
+    # Calcualate newCorners
+    newCorners = [False,False,False,False]
+    
     while 1:
         whlie ser.in_waiting:
             x=ser.read(1);
             x=x+ser.read(1);
             y=int.from_bytes(x, byteorder='big', signed=True)
             if y>=0 and y<22 or y>=338 and y<=359:
-                direction = 0;
+                newCorners = [True,True,False,False];
             if y>=22 and y<67:
-                direction = 1;
+                newCorners = [False,True,False,False];
             if y>=67 and y<112:
-                direction = 2;
+                newCorners = [False,True,False,True];
             if y>=112 and y<157:
-                direction = 3;
+                newCorners = [False,False,False,True];
             if y>=157 and y<202:
-                direction = 4;
+                newCorners = [False,False,True,True];
             if y>=202 and y<247:
-                direction = 5;
+                newCorners = [False,False,True,False];
             if y>=247 and y<292:
-                direction = 6;
+                newCorners = [True,False,True,False];
             if y>=292 and y<338:
-                direction = 7;
+                newCorners = [True,False,False,False];
             if y<0:
-                direction = -1;
+                newCorners = [False,False,False,False];
 
-    # Calcualate newCorners
-    newCorners = [False,False,False,False]
 
     directionChanged = False
     currentCorners = oled.getCurrentCorners()
