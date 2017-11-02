@@ -4,7 +4,7 @@ from threading import Thread
 
 ser = serial.Serial(
     port='/dev/ttyACM0',
-    baudrate=115200
+    baudrate=115200,
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
     bytesize=serial.EIGHTBITS,
@@ -29,7 +29,7 @@ def onReceived():
     newCorners = [False,False,False,False]
     
     while 1:
-        whlie ser.in_waiting:
+        while ser.in_waiting:
             x=ser.read(1);
             x=x+ser.read(1);
             y=int.from_bytes(x, byteorder='big', signed=True)

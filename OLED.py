@@ -7,7 +7,7 @@ import random
 
 import nltk
 
-nltk.download("punkt")
+#nltk.download("punkt")
 
 properties = None;
 currentText = ["",""]
@@ -70,7 +70,7 @@ def updateText():
     #ensures there are at least 2 items in the text queue
     if(len(textQueue) < 2):
         while(len(textQueue) < 2):
-            textQueue.append("")
+            textQueue.append("                    ")
 
     if((currentText[0] == "") & (currentText[1] == "")):
         currentText[0] = textQueue.pop(0)
@@ -134,7 +134,7 @@ def queueIncomingText(incomingText):
 
             if(len(displayLine) < maxLineChars):
                 for j in range(len(displayLine), maxLineChars):
-                    displayLine.append(" ")
+                    displayLine += (" ")
 
             textQueue.append(displayLine)
             print("Debug: " + displayLine + "\t\tadded to text queue.")
@@ -142,6 +142,10 @@ def queueIncomingText(incomingText):
             charCount = len(wordList[i])
 
     # gets the last char line
+    if(len(displayLine) < maxLineChars):
+        for j in range(len(displayLine), maxLineChars):
+            displayLine += (" ")
+
     textQueue.append(displayLine)
     print("Debug: " + displayLine + " added to text queue.")
 

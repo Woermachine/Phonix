@@ -1,6 +1,6 @@
 import OLED
-import Bluetooth
-import ShotgunMic
+#import Bluetooth
+#import ShotgunMic
 import Properties
 import ArdunioInterface
 import time
@@ -12,24 +12,35 @@ def main():
     ArdunioInterface.setOLED(OLED)
     ArdunioInterface.setProperties(Properties)
 
-    Bluetooth.setShotgunMic(ShotgunMic)
-    Bluetooth.setOLED(OLED)
-    bluetooth_thread = Bluetooth.BluetoothThread(1, "Bluetooth-Thread", 1)
-    bluetooth_thread.start()
+  #  Bluetooth.setShotgunMic(ShotgunMic)
+  #  Bluetooth.setOLED(OLED)
+  #  bluetooth_thread = Bluetooth.BluetoothThread(1, "Bluetooth-Thread", 1)
+  #  bluetooth_thread.start()
 
-    ShotgunMic.setBluetooth(Bluetooth)
+   # ShotgunMic.setBluetooth(Bluetooth)
 
     OLED.setProperties(Properties)
     OLED.initDisplay()
 
     #code to test the OLED
-    testString = "This is a test string to show whether the OlED will update properly Let's see how this goes"
+    testString = "This is a test string to show whether the OLED will update properly Let's see how this goes"
 
     OLED.queueIncomingText(testString)
 
     for i in range(0, 10):
         OLED.updateText()
-        time.sleep(2)
+        time.sleep(Properties.scrollSpeed)
+    
+    OLED.queueIncomingText(testString)
+
+    for i in range(0, 3):
+        OLED.updateText()
+        time.sleep(Properties.scrollSpeed)
+
+    OLED.queueIncomingText(testString)
+    for i in range(0, 17):
+        OLED.updateText()
+        time.sleep(Properties.scrollSpeed)
 
     exitBool = True
     while(~exitBool):
