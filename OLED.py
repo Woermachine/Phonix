@@ -56,11 +56,11 @@ def clearAlerts():
 def updateAlerts():
     if(currentCorners[0]):
         led.draw_text2(0, 0, "$", 1)
-    elif(currentCorners[1]):
+    if(currentCorners[1]):
         led.draw_text2(0, 25, "$", 1)
-    elif (currentCorners[2]):
+    if (currentCorners[2]):
         led.draw_text2(120, 0, "$", 1)
-    elif (currentCorners[3]):
+    if (currentCorners[3]):
         led.draw_text2(120, 25, "$", 1)
     led.display()
 

@@ -1,6 +1,7 @@
 import time
 import serial
-from threading import Thread
+import threading
+import OLED
 
 ser = serial.Serial(
     port='/dev/ttyACM0',
@@ -14,6 +15,21 @@ ser = serial.Serial(
 direction = -1
 oled = None
 properties = None
+
+class ArduinoThread (threading.Thread):
+    """
+        Thread Class which handles Running the EA system
+    """
+    def __init__(self, threadID, name, counter):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.counter = counter
+
+    def run(self):
+        print("Starting " + self.name)
+        onReceived()
+        print("Exiting " + self.name)
 
 
 def setOLED(driverOLED):
@@ -50,14 +66,13 @@ def onReceived():
             if y>=292 and y<338:
                 newCorners = [True,False,False,False];
             if y<0:
-                newCorners = [False,False,False,False];
-
-
-    directionChanged = False
-    currentCorners = oled.getCurrentCorners()
-    for i in range(0,len(currentCorners)):
-        if newCorners[i] == currentCorners[i]:
-            directionChanged = True
-
-    if (directionChanged):  # was changed
-        oled.setCurrentCorners(newCorners)
+                newCorners = [False,False,False,False]
+        
+        directionChanged = False
+        currentCorners = OLED.getCurrentCorners()
+        for i in range(0,len(currentCorners)):
+            if newCorners[i] != currentCorners[i]:
+                directionChanged = True
+        
+        if (directionChanged):  # was changed
+            OLED.setCurrentCorners(newCorners)

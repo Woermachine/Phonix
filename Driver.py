@@ -11,6 +11,8 @@ def main():
     #  Instantiate Screen, Bluetooth, Arduino Interface, ShotgunMic with reference objects
     ArdunioInterface.setOLED(OLED)
     ArdunioInterface.setProperties(Properties)
+    arduino_thread = ArdunioInterface.ArduinoThread(1,"Arduino-Thread",1)
+    arduino_thread.start()
 
   #  Bluetooth.setShotgunMic(ShotgunMic)
   #  Bluetooth.setOLED(OLED)
@@ -30,17 +32,8 @@ def main():
     for i in range(0, 10):
         OLED.updateText()
         time.sleep(Properties.scrollSpeed)
-    
-    OLED.queueIncomingText(testString)
 
-    for i in range(0, 3):
-        OLED.updateText()
-        time.sleep(Properties.scrollSpeed)
-
-    OLED.queueIncomingText(testString)
-    for i in range(0, 17):
-        OLED.updateText()
-        time.sleep(Properties.scrollSpeed)
+   
 
     exitBool = True
     while(~exitBool):
