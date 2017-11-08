@@ -45,10 +45,18 @@ def onReceived():
     newCorners = [False,False,False,False]
     
     while 1:
+        OLED.clearAlerts()
         while ser.in_waiting:
-            x=ser.read(1);
-            x=x+ser.read(1);
-            y=int.from_bytes(x, byteorder='big', signed=True)
+            a=ser.readline();
+            a=a[:-2]
+            #b=ser.read(1);
+            print("a: "+str(a))
+            #b=a.decoded("utf-8")
+            #print("b decode: "+str(b))
+            #rint("b: "+str(b))
+            #a=int.from_bytes(a, byteorder='big', signed=True)
+            #b=int.from_bytes(b, byteorder='big', signed=False)
+            y = int(a)
             if y>=0 and y<22 or y>=338 and y<=359:
                 newCorners = [True,True,False,False];
             if y>=22 and y<67:
@@ -67,7 +75,7 @@ def onReceived():
                 newCorners = [True,False,False,False];
             if y<0:
                 newCorners = [False,False,False,False]
-        
+            print("y: "+str(y)+"\n\n")
         directionChanged = False
         currentCorners = OLED.getCurrentCorners()
         for i in range(0,len(currentCorners)):
@@ -76,3 +84,5 @@ def onReceived():
         
         if (directionChanged):  # was changed
             OLED.setCurrentCorners(newCorners)
+
+        time.sleep(0.1)

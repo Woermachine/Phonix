@@ -48,20 +48,21 @@ def initDisplay():
     time.sleep(0.5)
 
 def clearAlerts():
-    led.draw_text2(0, 0, " ", 1)
-    led.draw_text2(0, 25, " ", 1)
-    led.draw_text2(120, 0, " ", 1)
-    led.draw_text2(120, 25, " ", 1)
+    led.draw_text2(0, 0, "  ", 1)
+    led.draw_text2(0, 25, "   ", 1)
+    led.draw_text2(120, 0, "   ", 1)
+    led.draw_text2(120, 25, "   ", 1)
+    led.display()
 
 def updateAlerts():
     if(currentCorners[0]):
-        led.draw_text2(0, 0, "$", 1)
+        led.draw_text2(0, 0, ".", 1)
     if(currentCorners[1]):
-        led.draw_text2(0, 25, "$", 1)
+        led.draw_text2(0, 25, ".", 1)
     if (currentCorners[2]):
-        led.draw_text2(120, 0, "$", 1)
+        led.draw_text2(120, 0, ".", 1)
     if (currentCorners[3]):
-        led.draw_text2(120, 25, "$", 1)
+        led.draw_text2(120, 25, ".", 1)
     led.display()
 
 
