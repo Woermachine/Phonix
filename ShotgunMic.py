@@ -1,8 +1,25 @@
 #imports
 import sounddevice as sd
 import soundfile as sf
+import threading
 import queue
 import sys
+
+class ShotgunMicThread (threading.Thread):
+    """
+        Thread Class which handles Running the Bluetooth RFComm server
+        away from ther seperate thread.
+    """
+    def __init__(self, threadID, name, counter):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.counter = counter
+
+    def run(self):
+        print("Starting " + self.name)
+        record()
+        print("Exiting " + self.name)
 
 fs = 44100
 sd.default.device = "USB audio device"
@@ -11,7 +28,7 @@ sd.default.channels = 1
 bluetooth = None
 properties = None
 
-file = sf.SoundFile("yo.wav", mode="x", samplerate=44100, channels=1, subtype="PCM_24"); 
+#file = sf.SoundFile("yo.wav", mode="x", samplerate=44100, channels=1, subtype="PCM_24"); 
 
 audio_queue = queue.Queue()
 
@@ -31,16 +48,11 @@ def sendAudioChunk(self):
     #sends audio chunk via bluetooth to the phone
     return
 
-print("Recording...")
-with sd.InputStream(callback=callback):
-    print('#' * 80)
-    print('press Ctrl+C to stop recording')
-    print('#' * 80)
-    while True:
-        file.write(audio_queue.get())
-
-
-
-#myrecording = sd.rec(int(2.5 * fs), channels=1, blocking=True)
-#print("Playing...")
-#sd.play(myrecording, blocking=True)
+def record(): 
+	print("Recording...")
+	with sd.InputStream(callback=callback):
+		print('#' * 80);
+		print('press Ctrl+C to stop recording')
+		print('#' * 80);
+		#while True:
+		#file.write(audio_queue.get())
