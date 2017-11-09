@@ -57,8 +57,12 @@ sudo apt-get install libportaudio2 libffi-dev
 sudo pip3 install cffi
 ```
 
-Then install sounddevice module:
-```sudo pip3 install sounddevice```
+Then install sounddevice & soundfile modules:
+```
+sudo pip3 install sounddevice
+sudo pip3 install soundfile
+
+```
 
 #### Install Git:
 
