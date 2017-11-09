@@ -112,7 +112,7 @@ def onReceiveAudio(audio):
 def sendAudio(socket):
     #sends audio from buffer to phone
     chunk = ShotgunMic.getAudioChunk()
-    if (chunk):
+    if (chunk.any()):
         print("WTF")
         socket.send(chunk)
 

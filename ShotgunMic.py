@@ -35,21 +35,15 @@ audio_queue = queue.Queue()
 CHUNK_NUM_BYTES = 128
 
 def callback(indata, frames, time, status):
-    if status:
-        print(status, file=sys.stderr)
+    #if status:
+     #   print(status, file=sys.stderr)
     audio_queue.put(indata.copy())			
 
 def getAudioChunk():
     #gets a chunk from the buffer
-    chunk=[]
-    
-    if audio_queue.qsize() >= 128:
-        for i in range (0, 128):
-            chunk[i] = audio_queue.get()
-        print("Pop goes the weasel!")
-        return chunk
-    else:
-        return False
+    chunk = audio_queue.get()
+    print(chunk)
+    return chunk
 
 def sendAudioChunk(self):
     #sends audio chunk via bluetooth to the phone
@@ -57,7 +51,8 @@ def sendAudioChunk(self):
 
 def record(): 
     print("Recording...")
-    sd.InputStream(callback=callback)
-    while True:
-        if ~Bluetooth.isConnected():
-            audio_queue.get()
+    with sd.InputStream(callback=callback):
+        while True:
+            if ~Bluetooth.isConnected():
+                #print("pop")
+                audio_queue.get()
