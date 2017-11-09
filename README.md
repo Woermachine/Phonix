@@ -50,7 +50,7 @@ Then we can enable serial profile with the following:
 ```sudo sdptool add SP```
 
 #### Install Sound Module Dependencies
-sounddevice is used to listen to shotgun mic, for it to install correctly, we need to first install cffi and its c dependendency ffi:
+sounddevice is used to listen to shotgun mic, for it to install correctly, we need to first install libportaudio2, cffi and its c dependendency ffi:
 ```
 sudo apt-get install libffi-dev
 
