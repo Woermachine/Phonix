@@ -43,7 +43,7 @@ class BluetoothConnectionThread (threading.Thread):
         
         print("Starting " + self.name)
         while running:
-            while ~connected:
+            while not connected:
                 print("Waiting for connection on RFCOMM channel %d" % port)
                 client_sock, client_info = server_sock.accept()
                 print("Accepted connection from ", client_info)
@@ -111,17 +111,19 @@ def onReceiveAudio(audio):
 
 def sendAudio(socket):
     #sends audio from buffer to phone
-	queue = ShotgunMic.audio_queue
-	print("QUEUE IS HERE BOI");
-	if (~queue.empty()):
-		print("WTF")
-		#socket.send(queue.get())
+    chunk = ShotgunMic.getAudioChunk()
+    if (chunk):
+        print("WTF")
+        socket.send(chunk)
 
 def onReceiveText(text):
     #receive text from phone and puts it in bufferIn
     print("received [%s]" % text)
     bufferIn.append(text)
     return
+
+def isConnected():
+    return connected
 
 def sendText():
     #sends text from the bufferIn to display

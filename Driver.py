@@ -14,8 +14,6 @@ def main():
     #arduino_thread = ArdunioInterface.ArduinoThread(1,"Arduino-Thread",1)
     #arduino_thread.start()
 
-    Bluetooth.setShotgunMic(ShotgunMic)
-    Bluetooth.setOLED(OLED)
     bluetooth_thread = Bluetooth.BluetoothConnectionThread(1, "BluetoothConnection-Thread", 1)
     bluetooth_thread.start()
 
@@ -27,8 +25,6 @@ def main():
     
     shotgun_thread = ShotgunMic.ShotgunMicThread(2, "ShotgunMic-Thread", 2)
     shotgun_thread.start()
-	
-    ShotgunMic.setBluetooth(Bluetooth)
 
     OLED.setProperties(Properties)
     OLED.initDisplay()
