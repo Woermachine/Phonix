@@ -25,18 +25,21 @@ class ShotgunMicThread (threading.Thread):
         record()
         print("Exiting " + self.name)
 
-fs = 44100
+fs = 48000
 sd.default.device = "USB audio device"
 sd.default.samplerate = fs
+sd.default.latency="high"
 sd.default.channels = 1
+sd.default.dtype="int16"
+sd.default.blocksize=14000
 properties = None
 audio_queue = queue.Queue()
 
 CHUNK_NUM_BYTES = 128
 
 def callback(indata, frames, time, status):
-    #if status:
-     #   print(status, file=sys.stderr)
+    if status:
+        print(status, file=sys.stderr)
     audio_queue.put(indata.copy())			
 
 def getAudioChunk():
@@ -54,5 +57,4 @@ def record():
     with sd.InputStream(callback=callback):
         while True:
             if ~Bluetooth.isConnected():
-                #print("pop")
-                audio_queue.get()
+                print(audio_queue.get())

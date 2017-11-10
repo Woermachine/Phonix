@@ -114,8 +114,11 @@ def sendAudio(socket):
     chunk = ShotgunMic.getAudioChunk()
     if (chunk.any()):
         print("WTF")
-        socket.send(chunk)
-
+        try:
+            socket.send(chunk)    
+        except BluetoothError:
+            connected=False
+        
 def onReceiveText(text):
     #receive text from phone and puts it in bufferIn
     print("received [%s]" % text)

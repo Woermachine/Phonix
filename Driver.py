@@ -23,20 +23,20 @@ def main():
     bluetooth_thread3 = Bluetooth.BluetoothAudioThread(1, "BluetoothAudio-Thread", 1)
     bluetooth_thread3.start()
     
-    shotgun_thread = ShotgunMic.ShotgunMicThread(2, "ShotgunMic-Thread", 2)
+    shotgun_thread = ShotgunMic.ShotgunMicThread(1, "ShotgunMic-Thread", 1)
     shotgun_thread.start()
 
-    OLED.setProperties(Properties)
-    OLED.initDisplay()
+    #OLED.setProperties(Properties)
+    #OLED.initDisplay()
 
     #code to test the OLED
-    testString = "This is a test string to show whether the OLED will update properly Let's see how this goes"
+    #testString = "This is a test string to show whether the OLED will update properly Let's see how this goes"
 
-    OLED.queueIncomingText(testString)
+    #OLED.queueIncomingText(testString)
 
-    for i in range(0, 10):
-        OLED.updateText()
-        time.sleep(Properties.scrollSpeed)
+    #for i in range(0, 10):
+    #    OLED.updateText()
+    #    time.sleep(Properties.scrollSpeed)
 
    
 
