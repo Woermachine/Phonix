@@ -39,6 +39,12 @@ sudo apt-get install libbluetooth-dev
 sudo pip3 install pybluez
 ``` 
 
+#### Install NumPy
+```
+sudo pip3 install numpy
+sudo apt-get install libblas3
+```
+
 #### Configure Pybluez Bluetooth Service:
 the bluetooth service running on the raspberry pi will not have compatibility mode enabled by default, disabling the ability to set
 bluetooth profiles via command-line impossible: First thing we need to do is add -C to the bluetooth.service
@@ -54,7 +60,6 @@ sounddevice is used to listen to shotgun mic, for it to install correctly, we ne
 ```
 sudo apt-get install libportaudio2 libffi-dev
 sudo pip3 install cffi
-sudo pip3 install numpy
 ```
 
 Then install sounddevice & soundfile modules:
