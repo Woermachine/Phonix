@@ -40,15 +40,9 @@ sudo pip3 install pybluez
 ``` 
 
 #### Install NumPy
-NumPy arrays are sometimes used in this project, as they are more versatile than regular python lists. If you are using raspbian-lite,
-it most likely will not come with libblas3 installed, which is required for numPy to work:
+NumPy arrays are sometimes used in this project, as they are more versatile than regular python lists. If you are on raspbian-lite (Which is what a 'production' model should be running) you will need to install it manually:
 ```
-sudo apt-get install libblas3
-```
-
-Then to install numpy:
-```
-sudo pip3 install numpy
+sudo apt-get install python-numpy
 ```
 
 #### Configure Pybluez Bluetooth Service:
