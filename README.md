@@ -53,8 +53,8 @@ Then we can enable serial profile with the following:
 sounddevice is used to listen to shotgun mic, for it to install correctly, we need to first install libportaudio2, cffi and its c dependendency ffi:
 ```
 sudo apt-get install libportaudio2 libffi-dev
-
 sudo pip3 install cffi
+sudo pip3 install numpy
 ```
 
 Then install sounddevice & soundfile modules:
