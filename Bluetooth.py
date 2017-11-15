@@ -1,6 +1,7 @@
 from bluetooth import *
 import threading
 import ShotgunMic
+import time
 
 shotgunMic = None;
 oled = None;
@@ -43,11 +44,12 @@ class BluetoothConnectionThread (threading.Thread):
         
         print("Starting " + self.name)
         while running:
-            while not connected:
+            if not connected:
                 print("Waiting for connection on RFCOMM channel %d" % port)
                 client_sock, client_info = server_sock.accept()
                 print("Accepted connection from ", client_info)
-                connected = True     
+                connected = True
+            time.sleep(1) #Don't Destroy CPU Please.
         print("Exiting " + self.name)
 		
 class BluetoothTextThread (threading.Thread):
@@ -95,7 +97,7 @@ class BluetoothAudioThread (threading.Thread):
         while running:
             while connected:
                 sendAudio(client_sock)
-                    
+                time.sleep(1) #Don't destroy Cpu please    
         print("Exiting " + self.name)
 
 
@@ -109,13 +111,19 @@ def onReceiveAudio(audio):
     #puts audio in the bufferOut
     return
 
-def sendAudio(socket):
-    #sends audio from buffer to phone
-    chunk = ShotgunMic.getAudioChunk()
-    if (chunk.any()):
-        print("WTF")
+"""
+    Accepts
+"""
+def send(data):
+    global connected
+    global running
+    global client_sock
+    global client_info
+
+    #sends data from buffer to phone
+    if (data.any() and connected):
         try:
-            socket.send(chunk)    
+            client_sock.send(data)    
         except BluetoothError:
             connected=False
         

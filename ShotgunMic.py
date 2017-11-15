@@ -4,7 +4,7 @@ import Bluetooth
 import soundfile as sf
 import threading
 import queue
-import sys
+import sys, os
 
 
 audio_queue = queue.Queue()
@@ -31,11 +31,9 @@ sd.default.samplerate = fs
 sd.default.latency="high"
 sd.default.channels = 1
 sd.default.dtype="int16"
-sd.default.blocksize=50000
+#sd.default.blocksize=8192
 properties = None
 audio_queue = queue.Queue()
-
-CHUNK_NUM_BYTES = 128
 
 def callback(indata, frames, time, status):
     if status:
@@ -44,7 +42,7 @@ def callback(indata, frames, time, status):
 
 def getAudioChunk():
     #gets a chunk from the buffer
-    chunk = audio_queue.get()
+    chunk = bytes(audio_queue.get())
     #print(chunk)
     return chunk
 
@@ -54,8 +52,22 @@ def sendAudioChunk(self):
 
 def record(): 
     print("Recording...")
+    
+    # Attempt to delete test.wav if it exists.
+    try:
+        os.remove("test.wav")
+        os.remove("test2.wav")
+    except OSError:
+        pass
+    
+    file2 = open("test2.wav", "wb")
+    
     with sf.SoundFile("test.wav", mode="x", samplerate=fs, channels=1, subtype="PCM_16") as file:
         with sd.InputStream(callback=callback):
             while True:
-                if ~Bluetooth.isConnected():
-                    file.write(audio_queue.get());
+                if Bluetooth.isConnected():
+                    #print("connected");
+                    chunk = audio_queue.get();
+                    Bluetooth.send(chunk);
+                    #file.write(chunk);
+                    #file2.write(bytes(chunk));

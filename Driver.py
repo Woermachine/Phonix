@@ -20,8 +20,8 @@ def main():
     bluetooth_thread2 = Bluetooth.BluetoothTextThread(1, "BluetoothText-Thread", 1)
     bluetooth_thread2.start()
     
-    bluetooth_thread3 = Bluetooth.BluetoothAudioThread(1, "BluetoothAudio-Thread", 1)
-    bluetooth_thread3.start()
+    #bluetooth_thread3 = Bluetooth.BluetoothAudioThread(1, "BluetoothAudio-Thread", 1)
+    #bluetooth_thread3.start()
     
     shotgun_thread = ShotgunMic.ShotgunMicThread(1, "ShotgunMic-Thread", 1)
     shotgun_thread.start()
