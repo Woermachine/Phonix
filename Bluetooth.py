@@ -1,7 +1,13 @@
+#External Dependency imports
 from bluetooth import *
+
+#Python 3 Standard imports
 import threading
-import ShotgunMic
 import time
+
+#Project Specific imports
+import ShotgunMic
+import OLED
 
 shotgunMic = None;
 oled = None;
@@ -131,6 +137,7 @@ def onReceiveText(text):
     #receive text from phone and puts it in bufferIn
     print("received [%s]" % text)
     bufferIn.append(text)
+    OLED.queueIncomingText(text.decode("utf-8"))
     return
 
 def isConnected():

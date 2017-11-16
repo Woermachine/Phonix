@@ -71,3 +71,5 @@ def record():
                     Bluetooth.send(chunk);
                     #file.write(chunk);
                     #file2.write(bytes(chunk));
+                else:
+                    audio_queue.get();
