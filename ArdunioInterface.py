@@ -4,7 +4,8 @@ import threading
 import OLED
 
 ser = serial.Serial(
-    port='/dev/ttyACM0',
+    #port='/dev/ttyACM0',
+    port='/dev/ttyUSB0',
     baudrate=115200,
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
