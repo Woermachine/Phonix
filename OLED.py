@@ -44,6 +44,7 @@ class OLEDThread(threading.Thread):
         self.counter = counter
 
     def run(self):
+        initDisplay()
         print("Starting " + self.name)
         while(True):
             updateText()
@@ -79,13 +80,13 @@ def clearAlerts():
 
 def updateAlerts():
     if(currentCorners[0]):
-        led.draw_text2(0, 0, "$", 1)
+        led.draw_text2(0, 0, ".", 1)
     if(currentCorners[1]):
-        led.draw_text2(0, 25, "$", 1)
+        led.draw_text2(0, 25, ".", 1)
     if (currentCorners[2]):
-        led.draw_text2(120, 0, "$", 1)
+        led.draw_text2(120, 0, ".", 1)
     if (currentCorners[3]):
-        led.draw_text2(120, 25, "$", 1)
+        led.draw_text2(120, 25, ".", 1)
     led.display()
 
 
