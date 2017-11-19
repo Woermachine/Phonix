@@ -52,7 +52,10 @@ sudo apt-get install python-numpy
 the bluetooth service running on the raspberry pi will not have compatibility mode enabled by default, disabling the ability to set
 bluetooth profiles via command-line impossible: First thing we need to do is add -C to the bluetooth.service
 
-<INSERT_WORK_HERE>
+```
+sudo nano /lib/systemd/system/bluetooth.service
+ExecStart=/user/lib/bluetooth/bluetoothd -C
+```
 
 Then we can enable serial profile with the following:
 
