@@ -1,3 +1,5 @@
+import threading
+
 import gaugette.ssd1306
 import gaugette.platform
 import gaugette.gpio
@@ -8,6 +10,7 @@ import random
 import nltk
 
 #nltk.download("punkt")
+import Properties
 
 properties = None;
 currentText = ["",""]
@@ -26,6 +29,27 @@ spi = gaugette.spi.SPI(spi_bus, spi_device)
 # Very important... This lets py-gaugette 'know' what pins to use in order to reset the display
 led = gaugette.ssd1306.SSD1306(gpio, spi, reset_pin=RESET_PIN, dc_pin=DC_PIN, rows=32, cols=128)
 list = list() #Initialize an empty list to prevent exceptions.
+
+
+# Update Thread which gets instantiated by Driver main class
+class OLEDThread(threading.Thread):
+    """
+        Thread Class which handles updating the screen output
+    """
+
+    def __init__(self, threadID, name, counter):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.counter = counter
+
+    def run(self):
+        print("Starting " + self.name)
+        while(True):
+            updateText()
+            time.sleep(Properties.scrollSpeed)
+        print("Exiting " + self.name)
+
 
 #to get the scrollSpeed value
 def setProperties(driverProperties):

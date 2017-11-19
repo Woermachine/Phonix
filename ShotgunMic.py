@@ -1,5 +1,7 @@
 #imports
 import sounddevice as sd
+import time
+
 import Bluetooth
 import soundfile as sf
 import threading
@@ -25,8 +27,7 @@ class ShotgunMicThread (threading.Thread):
         record()
         print("Exiting " + self.name)
 
-fs = 44100
-sd.default.device = "USB audio device"
+fs = 8000
 sd.default.samplerate = fs
 sd.default.latency="high"
 sd.default.channels = 1
@@ -35,6 +36,14 @@ sd.default.dtype="int16"
 properties = None
 audio_queue = queue.Queue()
 
+PAYLOAD_MAX_CHUNKS = 1
+
+## callback
+# indata - Numpy.array (contains multiple frames)
+# frames - number of frames recorded
+# time - how long its was recording for
+# status - error codes (normally NULL)
+##
 def callback(indata, frames, time, status):
     if status:
         print(status, file=sys.stderr)
@@ -52,24 +61,28 @@ def sendAudioChunk(self):
 
 def record(): 
     print("Recording...")
-    
-    # Attempt to delete test.wav if it exists.
-    try:
-        os.remove("test.wav")
-        os.remove("test2.wav")
-    except OSError:
-        pass
-    
-    file2 = open("test2.wav", "wb")
-    
-    with sf.SoundFile("test.wav", mode="x", samplerate=fs, channels=1, subtype="PCM_16") as file:
-        with sd.InputStream(callback=callback):
-            while True:
-                if Bluetooth.isConnected():
-                    #print("connected");
-                    chunk = audio_queue.get();
-                    Bluetooth.send(chunk);
-                    #file.write(chunk);
-                    #file2.write(bytes(chunk));
-                else:
-                    audio_queue.get();
+    while True:
+        if Bluetooth.isConnected():
+            with sd.InputStream(callback=callback) as stream:
+                while True:
+                    if Bluetooth.isConnected():
+                        payload = createAudioPayload()
+                        Bluetooth.send(payload);
+                    else:
+                        stream.close();
+        time.sleep(1) #Please no kill CPU
+
+"""
+Creates an audio payload which is just multiple chunks of audio
+concatenated together into one long byte string.
+"""
+def createAudioPayload():
+    i = 0
+    payload = []
+    while i < PAYLOAD_MAX_CHUNKS and audio_queue.qsize() > 0:
+        payload.append(bytes(audio_queue.get()))
+        i = i + 1
+    payload = b''.join(payload)
+    #print(len(payload))
+    return payload
+

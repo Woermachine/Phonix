@@ -56,6 +56,7 @@ class BluetoothConnectionThread (threading.Thread):
                 print("Accepted connection from ", client_info)
                 connected = True
             time.sleep(1) #Don't Destroy CPU Please.
+            print(ShotgunMic.audio_queue.qsize())
         print("Exiting " + self.name)
 		
 class BluetoothTextThread (threading.Thread):
@@ -127,7 +128,7 @@ def send(data):
     global client_info
 
     #sends data from buffer to phone
-    if (data.any() and connected):
+    if (isConnected()):
         try:
             client_sock.send(data)    
         except BluetoothError:
