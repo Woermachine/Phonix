@@ -83,8 +83,10 @@ class BluetoothTextThread (threading.Thread):
                         onReceiveText(data)
                     else:
                         connected = False
+                        print("Failed in if-else")
             except IOError:
                     connected = False
+                    print("Failed with IOError");
         print("Exiting " + self.name)
 		
 class BluetoothAudioThread (threading.Thread):
