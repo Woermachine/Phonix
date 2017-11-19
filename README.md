@@ -25,19 +25,22 @@ Be connected to internet
 
 ``` sudo apt-get install python3```
 
-#### Install NLTK
 
-``` sudo pip3 install nltk``` 
 
 #### Install pybluez:
 
 ```
-sudo apt-get install python-pip python-dev ipython
+sudo apt-get install python3-pip python3-dev ipython
 
 sudo apt-get install libbluetooth-dev
 
 sudo pip3 install pybluez
-``` 
+```
+
+#### Install NLTK
+
+``` sudo pip3 install nltk``` 
+ 
 
 #### Install NumPy
 NumPy arrays are sometimes used in this project, as they are more versatile than regular python lists. If you are on raspbian-lite (Which is what a 'production' model should be running) you will need to install it manually:
@@ -98,7 +101,7 @@ i2c-dev
 
 Ctrl-O to write out
 
-Ctrl-Z to exit
+Ctrl-X to exit
 
 **Open in Raspbian home menu, open preferences>interfaces and change ssh, and spi to enabled**
 
@@ -118,7 +121,7 @@ run one of the example programs to test that the screen is functioning
 
 ```
 cd python-examples
-sudo pythons OLEDclock.py
+sudo python3 OLEDclock.py
 ```
 
 #Install this repository Clone
