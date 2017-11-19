@@ -124,6 +124,9 @@ cd python-examples
 sudo python3 OLEDclock.py
 ```
 
+```
+sudo pip3 install spidev serial
+```
 #Install this repository Clone
 
 After preforming the previous steps, clone this repository
