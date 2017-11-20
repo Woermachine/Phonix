@@ -64,7 +64,7 @@ def record():
     while True:
         if Bluetooth.isConnected():
             with sd.InputStream(callback=callback) as stream:
-                while True:
+                while stream.active:
                     if Bluetooth.isConnected():
                         payload = createAudioPayload()
                         Bluetooth.send(payload);
