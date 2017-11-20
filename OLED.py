@@ -11,6 +11,7 @@ import nltk
 
 #nltk.download("punkt")
 import Properties
+from PIL import Image
 
 properties = None;
 currentText = ["",""]
@@ -70,6 +71,7 @@ def initDisplay():
     led.begin()
     led.clear_display()
     led.display()
+    print_monkey()
     time.sleep(0.5)
 
 def clearAlerts():
@@ -208,3 +210,21 @@ def queueIncomingText(incomingText):
 #     print(listb)
 
 # name of file as parameter and continue over writing file and keep open function(list of text,corners boolean if true put identifier)
+def print_monkey():
+    width = 128
+    height = 32
+    image = Image.open("8bit3wm.png")
+    image_r = image.resize((width,height), Image.BICUBIC)
+    image_bw = image_r.convert("1")
+    for x in range (width):
+        for y in range(height):
+            led.draw_pixel(x,y,bool(int(image_bw.getpixel((x,y)))))
+    
+    led.display()
+    time.sleep(2)
+    led.clear_display()
+    time.sleep(1)
+    led.draw_text2(30,12,"3WM Software",1)
+    led.display()
+    time.sleep(2)
+    led.clear_display()
