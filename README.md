@@ -151,6 +151,5 @@ To install gaugette and it's dependencies look at its gitHub page: https://githu
 ```
 sudo cp /Phonix/phonix.service /etc/systemd/system/phonix.service
 sudo systemctl enable phonix.service
-sudo systemctl start phonix.service
 ```
 
