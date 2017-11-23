@@ -145,3 +145,12 @@ and follow the instructions in this video https://www.youtube.com/watch?v=BeBfpJ
 
 Py-Gaugette-
 To install gaugette and it's dependencies look at its gitHub page: https://github.com/stephen-mw/ssd1306-128x64-lib
+
+
+#Make phonix softare run at startup
+```
+sudo cp /Phonix/phonix.service /etc/systemd/system/phonix.service
+sudo systemctl enable phonix.service
+sudo systemctl start phonix.service
+```
+
