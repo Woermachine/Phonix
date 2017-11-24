@@ -18,6 +18,8 @@ currentText = ["",""]
 textQueue = []
 currentCorners = [False,False,False,False] #FL, FR, BL, BR
 
+status = 0
+
 #Initialization of display values
 RESET_PIN = 15  # WiringPi pin 15 is GPIO14.
 DC_PIN = 16  # WiringPi pin 16 is GPIO15.
@@ -93,7 +95,7 @@ def updateAlerts():
 
 
 def updateText():
-
+    global status
     #ensures there are at least 2 items in the text queue
     if(len(textQueue) < 2):
         while(len(textQueue) < 2):
@@ -106,11 +108,29 @@ def updateText():
         currentText[0] = currentText[1]
         currentText[1] = textQueue.pop(0)
 
-    led.draw_text2(0, 8, currentText[0], 1)
-    led.draw_text2(0, 17, currentText[1], 1)
+    if(status!=1):
+        status = 0
+
+    try:
+        led.draw_text2(0, 8, currentText[0], 1)
+    except IndexError:
+        status = 2
+    try:
+        led.draw_text2(0, 17, currentText[1], 1)
+    except IndexError:
+        status = 2
+
+    #Check for foreign characters
+    #try:
+    #    currentText[0].index("\\")
+    #    currentText[1].index("\\")
+    #    setStatus(2)
+    #except ValueError:
+    #    setStatus(0)
 
     print("Debug: current display: " + currentText[0] + "/" + currentText[1])
-
+    print(status)
+    printStatus()
     led.display()
 
     # ##Most of the commented out stuff is what is used to actually display stuff to the screen.
@@ -144,6 +164,7 @@ def updateText():
 
 def queueIncomingText(incomingText):
     from nltk.tokenize import regexp_tokenize
+
     regex = "([ ]|[ +]|[\n]|[\t])"
     wordList = regexp_tokenize(incomingText, regex, gaps=True, discard_empty=True)
 
@@ -228,3 +249,17 @@ def print_monkey():
     led.display()
     time.sleep(2)
     led.clear_display()
+##
+# Prints status indicator at top of the
+# 0 = CLEAR
+# 1 = NO CONNECTION
+# 2 = FOREIGN SYMBOLS
+##
+def printStatus():
+    if(status == 0): #Clear
+        led.draw_text2(16,0,"               ",1)
+    elif(status == 1):
+        led.draw_text2(16,0," NO CONNECTION ",1)
+    elif(status == 2):
+        led.draw_text2(16,0,"FOREIGN SYMBOLS",1)
+

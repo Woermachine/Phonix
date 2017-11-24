@@ -4,7 +4,7 @@ import threading
 import OLED
 
 ser = serial.Serial(
-    port='/dev/ttyACM0',
+    port='/dev/ttyUSB0',
     baudrate=115200,
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
@@ -45,10 +45,13 @@ def onReceived():
     newCorners = [False,False,False,False]
     
     while 1:
+        OLED.clearAlerts()
         while ser.in_waiting:
-            x=ser.read(1);
-            x=x+ser.read(1);
-            y=int.from_bytes(x, byteorder='big', signed=True)
+            a=ser.readline()
+            a=a[:-2]
+            print("a: "+str(a))
+            #y=int.from_bytes(x, byteorder='big', signed=True)
+            y = int(a)
             if y>=0 and y<22 or y>=338 and y<=359:
                 newCorners = [True,True,False,False];
             if y>=22 and y<67:
@@ -76,3 +79,4 @@ def onReceived():
         
         if (directionChanged):  # was changed
             OLED.setCurrentCorners(newCorners)
+        time.sleep(0.1)

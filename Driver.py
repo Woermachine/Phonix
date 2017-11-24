@@ -2,7 +2,7 @@ import OLED
 import Bluetooth
 import ShotgunMic
 import Properties
-#import ArdunioInterface
+import ArdunioInterface
 import time
 
 
@@ -11,8 +11,8 @@ def main():
     #  Instantiate Screen, Bluetooth, Arduino Interface, ShotgunMic with reference objects
     #ArdunioInterface.setOLED(OLED)
     #ArdunioInterface.setProperties(Properties)
-    #arduino_thread = ArdunioInterface.ArduinoThread(1,"Arduino-Thread",1)
-    #arduino_thread.start()
+    arduino_thread = ArdunioInterface.ArduinoThread(1,"Arduino-Thread",1)
+    arduino_thread.start()
 
     bluetooth_thread = Bluetooth.BluetoothConnectionThread(1, "BluetoothConnection-Thread", 1)
     bluetooth_thread.start()
@@ -45,6 +45,7 @@ def main():
     #while(~exitBool):
     #    a = True
     # Wait until all threads close
+    arduino_thread.join()
     bluetooth_thread.join()
     bluetooth_thread2.join()
     shotgun_thread.join()

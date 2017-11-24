@@ -52,8 +52,11 @@ class BluetoothConnectionThread (threading.Thread):
         while running:
             if not connected:
                 print("Waiting for connection on RFCOMM channel %d" % port)
+                OLED.status = 1
                 client_sock, client_info = server_sock.accept()
                 print("Accepted connection from ", client_info)
+                OLED.queueIncomingText("! CONNECTED !")
+                OLED.status = 0
                 connected = True
             time.sleep(1) #Don't Destroy CPU Please.
             print(ShotgunMic.audio_queue.qsize())
@@ -84,9 +87,11 @@ class BluetoothTextThread (threading.Thread):
                     else:
                         connected = False
                         print("Failed in if-else")
+                        OLED.queueIncomingText("! Connection Lost !")
             except IOError:
                     connected = False
                     print("Failed with IOError");
+                    OLED.queueIncomingText("! Connection Lost !")
         print("Exiting " + self.name)
 		
 class BluetoothAudioThread (threading.Thread):
