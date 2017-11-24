@@ -25,40 +25,55 @@ Be connected to internet
 
 ``` sudo apt-get install python3```
 
-#### Install NLTK
 
-``` sudo pip3 install nltk``` 
 
 #### Install pybluez:
 
 ```
-sudo apt-get install python-pip python-dev ipython
+sudo apt-get install python3-pip python3-dev ipython
 
 sudo apt-get install libbluetooth-dev
 
 sudo pip3 install pybluez
-``` 
+```
+
+#### Install NLTK
+
+``` sudo pip3 install nltk``` 
+ 
+
+#### Install NumPy
+NumPy arrays are sometimes used in this project, as they are more versatile than regular python lists. If you are on raspbian-lite (Which is what a 'production' model should be running) you will need to install it manually:
+```
+sudo apt-get install python-numpy
+```
 
 #### Configure Pybluez Bluetooth Service:
 the bluetooth service running on the raspberry pi will not have compatibility mode enabled by default, disabling the ability to set
 bluetooth profiles via command-line impossible: First thing we need to do is add -C to the bluetooth.service
 
-<INSERT_WORK_HERE>
+```
+sudo nano /lib/systemd/system/bluetooth.service
+ExecStart=/user/lib/bluetooth/bluetoothd -C
+```
 
 Then we can enable serial profile with the following:
 
 ```sudo sdptool add SP```
 
 #### Install Sound Module Dependencies
-sounddevice is used to listen to shotgun mic, for it to install correctly, we need to first install cffi and its c dependendency ffi:
+sounddevice is used to listen to shotgun mic, for it to install correctly, we need to first install libportaudio2, cffi and its c dependendency ffi, as well as libsndfile1(soundfile dependency):
 ```
-sudo apt-get install libffi-dev
-
+sudo apt-get install libportaudio2 libffi-dev libsndfile1
 sudo pip3 install cffi
 ```
 
-Then install sounddevice module:
-```sudo pip3 install sounddevice```
+Then install sounddevice & soundfile modules:
+```
+sudo pip3 install sounddevice
+sudo pip3 install soundfile
+
+```
 
 #### Install Git:
 
@@ -89,7 +104,7 @@ i2c-dev
 
 Ctrl-O to write out
 
-Ctrl-Z to exit
+Ctrl-X to exit
 
 **Open in Raspbian home menu, open preferences>interfaces and change ssh, and spi to enabled**
 
@@ -109,9 +124,12 @@ run one of the example programs to test that the screen is functioning
 
 ```
 cd python-examples
-sudo pythons OLEDclock.py
+sudo python3 OLEDclock.py
 ```
 
+```
+sudo pip3 install spidev serial
+```
 #Install this repository Clone
 
 After preforming the previous steps, clone this repository
@@ -127,3 +145,11 @@ and follow the instructions in this video https://www.youtube.com/watch?v=BeBfpJ
 
 Py-Gaugette-
 To install gaugette and it's dependencies look at its gitHub page: https://github.com/stephen-mw/ssd1306-128x64-lib
+
+
+#Make phonix softare run at startup
+```
+sudo cp /Phonix/phonix.service /etc/systemd/system/phonix.service
+sudo systemctl enable phonix.service
+```
+

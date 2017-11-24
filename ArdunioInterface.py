@@ -49,8 +49,7 @@ def onReceived():
         while ser.in_waiting:
             a=ser.readline()
             a=a[:-2]
-            print("a: "+str(a))
-            #y=int.from_bytes(x, byteorder='big', signed=True)
+            #print("a: "+str(a))
             y = int(a)
             if y>=0 and y<22 or y>=338 and y<=359:
                 newCorners = [True,True,False,False];
@@ -70,7 +69,7 @@ def onReceived():
                 newCorners = [True,False,False,False];
             if y<0:
                 newCorners = [False,False,False,False]
-        
+            print("y: "+str(y)+"\n\n")
         directionChanged = False
         currentCorners = OLED.getCurrentCorners()
         for i in range(0,len(currentCorners)):
@@ -79,4 +78,5 @@ def onReceived():
         
         if (directionChanged):  # was changed
             OLED.setCurrentCorners(newCorners)
+
         time.sleep(0.1)

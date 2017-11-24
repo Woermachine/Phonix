@@ -262,4 +262,3 @@ def printStatus():
         led.draw_text2(16,0," NO CONNECTION ",1)
     elif(status == 2):
         led.draw_text2(16,0,"FOREIGN SYMBOLS",1)
-
