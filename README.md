@@ -146,6 +146,9 @@ and follow the instructions in this video https://www.youtube.com/watch?v=BeBfpJ
 Py-Gaugette-
 To install gaugette and it's dependencies look at its gitHub page: https://github.com/stephen-mw/ssd1306-128x64-lib
 
+# Install PIL Fork (Pillow)
+sudo pip3 install Pillow
+
 
 #Make phonix softare run at startup
 ```
