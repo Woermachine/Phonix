@@ -1,6 +1,8 @@
 # Phonix
 
-This repository contains the software which will run on the Raspberry Pi and Arduino. It will compose the Phonix smartglasses software.
+This repository contain the software for the Phonix Smartglasses Prototype which will runs on the Raspberry Pi and Arduino. The companion Android app is available here: https://github.com/Woermachine/PhonixAndroidApp
+
+The software is licensed under GNU GPLv3. See License.txt for details.
 
 # Setup
 
